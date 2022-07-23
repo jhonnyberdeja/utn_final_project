@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build-client",
+    "start": "npm run start-server",
+    "build-client": "npm run build --prefix=client",
+    "build-server": "npm start --prefix=server"
   },
   "repository": {
     "type": "git",
