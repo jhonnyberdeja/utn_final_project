@@ -5,7 +5,7 @@ let userModel;
 switch (connection) {
 
     case MYSQL:
-        userModel = require("./mysql/user"); break;
+        userModel = require("./sql/user"); break;
     case MONGO:
         userModel = require("./mongo/user"); break;
     default:

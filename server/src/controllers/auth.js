@@ -46,6 +46,7 @@ const handleRegister = async (req, res) => {
         const plainPassword = data.password;
 
         data.password = await getHashedPassword(plainPassword);
+        console.log(data);
         await userModel.customCreate(data);
 
         return res.json({

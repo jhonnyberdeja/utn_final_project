@@ -7,7 +7,9 @@
     "build": "npm run build-client",
     "start": "npm run start-server",
     "build-client": "npm run build --prefix=client",
-    "build-server": "npm start --prefix=server"
+    "build-server": "npm start --prefix=server",
+    "dev-server": "env-cmd -f server.env npm run dev --prefix=server",
+    "dev-client": "env-cmd -f client.env npm start --prefix=client"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/jhonnyberdeja/utn_final_project/issues"
   },
-  "homepage": "https://github.com/jhonnyberdeja/utn_final_project#readme"
+  "homepage": "https://github.com/jhonnyberdeja/utn_final_project#readme",
+  "devDependencies": {
+    "concurrently": "^7.3.0",
+    "env-cmd": "^10.1.0"
+  }
 }
