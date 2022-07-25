@@ -28,6 +28,11 @@ const customFind = async (dataToFind)=>{
     return user;
 }
 
+const customFindAll = async ()=>{
+    const users = await User.find();
+    return users;
+}
+
 
 User.customCreate = customCreate;
 User.customUpdate = customUpdate;

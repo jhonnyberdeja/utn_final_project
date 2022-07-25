@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build-client",
-    "start": "npm run start-server",
+    "start": "env-cmd -f server.env npm run start-server",
     "build-client": "npm run build --prefix=client",
-    "build-server": "npm start --prefix=server",
+    "start-server": "npm start --prefix=server",
     "dev-server": "env-cmd -f server.env npm run dev --prefix=server",
     "dev-client": "env-cmd -f client.env npm start --prefix=client"
   },

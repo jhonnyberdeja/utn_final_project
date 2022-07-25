@@ -39,6 +39,7 @@ export default function App() {
 
   return (
     <StoreContext.Provider value={value}>
+        {/*<AuthorizationContext.Provider value={{isLoggedIn}}>*/}
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Toaster position="top-center" reverseOrder={false} />
@@ -57,6 +58,7 @@ export default function App() {
           </Layout>
         </BrowserRouter>
       </ThemeProvider>
+      {/*</AuthorizationContext.Provider>*/}
     </StoreContext.Provider >
   );
 }

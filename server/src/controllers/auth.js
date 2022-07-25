@@ -1,32 +1,49 @@
-const { getHashedPassword } = require("../helpers/handleEncrypt");
+const { getHashedPassword, isTheSameHash } = require("../helpers/handleEncrypt");
+const { getJSONWebToken } = require("../helpers/handleJWT");
 const { userModel } = require("../models");
+const {setCookie} = require("../helpers/handleCookie");
 
-const handleLogin = (req, res) => {
-    //
-    const { email, password } = req.body;
+const handleLogin = async (req,res, next) =>{
 
-    if (!email || !password)
-        return res.json({
-            error: "email and passwords are required"
-        })
+    try{
 
-    if (email != 'test@test.com')
-        return res.json({
-            error: "user not registered"
-        })
+        const {email, password} = req.body;
+    
+        const user = await userModel.findOne({ email: email }).exec();
+        
 
-    if (password != 'test')
-        return res.json({
-            error: "password incorrect"
-        })
-
-    return res.json({
-        message: "user logged in succesfully",
-        body: {
-            token: "tu token"
+        if(!user){
+            res.status(400);
+            return res.json({error:"User not registered"});
         }
-    })
 
+        const isAuthorized = await isTheSameHash(password,user.password);
+        
+        if(!isAuthorized){
+            res.status(401);
+            return res.json({error:"User not authorized"});
+        }
+
+        const token = getJSONWebToken(user);
+
+        console.log("TOKEN CREADO");
+        console.log(token);
+
+        setCookie(req,token);
+
+        return res.json({
+            message: "user logged in succesfully",
+            body: {
+                token: token
+            }
+        })
+    
+    }catch(error){
+        
+        console.log(error);
+        res.status(500);
+        return res.json({"server_error":error});
+    }
 }
 
 
